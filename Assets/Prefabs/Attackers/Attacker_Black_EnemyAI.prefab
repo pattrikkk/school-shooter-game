@@ -1317,6 +1317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _detectionRadius: 10
   _rotationSpeed: 5
+  _animator: {fileID: 2638869318187615879}
 --- !u!1 &8862203072322625981
 GameObject:
   m_ObjectHideFlags: 0

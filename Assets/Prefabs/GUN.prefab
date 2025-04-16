@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47f958d5cd38409419d78556e3ef0bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 5579762394125303948, guid: 7da58853a018fba429d95f3429bc0a04, type: 3}
+  projectile: {fileID: 266451061552346764, guid: 615f10844ccecef4e927ac1277adbc7e, type: 3}
   power: 29
   shootPoint: {fileID: 2910092684860710036}
   grabPoint: {fileID: 2910092683272429043}

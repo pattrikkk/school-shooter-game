@@ -5,12 +5,16 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] float _detectionRadius = 10f;  // How close the player needs to be
     [SerializeField] float _rotationSpeed = 5f;    // Speed at which the enemy rotates
+    [SerializeField] Animator _animator;
+    [SerializeField] private int _health = 3;
+    [SerializeField] CapsuleCollider _capsuleCollider;
 
     private Transform _player;
     private NavMeshAgent _agent;
     private bool _playerInRange = false;
     private bool _wasGazedAt = false;
-    private float _currentGazeTime = 0f;
+    private bool _isDead = false; // Added to prevent actions after death
+
 
     void Start()
     {
@@ -31,11 +35,12 @@ public class EnemyAI : MonoBehaviour
     private void IsBeingGazedOn()
     {
         _wasGazedAt = true;
+        _animator.SetBool("CanShoot", true);
     }
 
     void Update()
     {
-        if (_player == null) return;
+        if (_player == null || _isDead) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, _player.position);
 
@@ -57,6 +62,55 @@ public class EnemyAI : MonoBehaviour
 
         //_agent.SetDestination(_player.position);  // Follow Player.  Remove/Comment this out if you don't want it to follow.
         //_agent.ResetPath(); //stop
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        if (_isDead) return; // Prevent taking damage if already dead
+
+        _health -= damageAmount;
+        Debug.Log(gameObject.name + " took " + damageAmount + " damage. Health: " + _health);
+
+        if (_health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        _isDead = true;
+
+        if (_animator != null)
+        {
+            _animator.SetBool("IsDead", true); // Use the parameter name
+        }
+        //  Disable the NavMeshAgent
+        if (_agent != null)
+        {
+            _agent.enabled = false;
+        }
+
+        //  Disable the collider so it doesn't get hit again.
+        if (_capsuleCollider != null)
+        {
+            _capsuleCollider.enabled = false;
+        }
+
+        Destroy(gameObject, 3f); // Adjust the time as needed for your death animation
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("BULET");
+
+        // Check if the collision was with a bullet
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Debug.Log("BULET");
+            Destroy(collision.gameObject);
+            TakeDamage(1);
+        }
     }
 
     void OnDrawGizmosSelected()
