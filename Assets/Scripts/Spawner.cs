@@ -1,31 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public Target aiPrefab;       // The AI prefab to spawn
-    public float spawnInterval = 2f;  // Time between each spawn
-    public Vector3 spawnAreaMin;      // The minimum point of the spawn area
-    public Vector3 spawnAreaMax;      // The maximum point of the spawn area
-    public Transform playerr;
+    [SerializeField] Objects _allSpawnableObjects;
+    [SerializeField] Transform _player;
+    [SerializeField] PlayerControllerNonVR _playerNonVR;
+    //pridat pozicie z ktorych sa random vyberu pre studentov a potom dalsi list pre ENEMY
+
     private void Start()
     {
-        // Start the spawn process
-        InvokeRepeating("SpawnAI", 0f, spawnInterval);
+        SpawnAI();
+        SpawnStudents();
+    }
+
+    private void SpawnStudents()
+    {
+        foreach (var student in _allSpawnableObjects.Students)
+        {
+
+        }
     }
 
     void SpawnAI()
     {
-        // Generate a random position within the spawn area
-        float randomX = Random.Range(spawnAreaMin.x, spawnAreaMax.x);
-        float randomY = Random.Range(spawnAreaMin.y, spawnAreaMax.y);
-        float randomZ = Random.Range(spawnAreaMin.z, spawnAreaMax.z);
+        var shooterPrefab = _allSpawnableObjects.Shooters[0]; // random dat
+        Vector3 spawnPosition = new Vector3(-2.76999998f, 1.09f, -0.419999987f); // dat to nahodne
 
-        Vector3 spawnPosition = new Vector3(randomX, randomY, randomZ);
+        GameObject spawnedShooter = Instantiate(shooterPrefab, spawnPosition, Quaternion.identity);
+        var aiScript = spawnedShooter.GetComponent<EnemyAI>();
+        aiScript.Setup(_playerNonVR.transform);
 
-        // Instantiate the AI prefab at the random position
-        var ai = Instantiate(aiPrefab, spawnPosition, Quaternion.identity);
-        ai.Setup(playerr);
+        // choose random typek from _allSpawnableObjects, getComponent EnemyAI, zabolaù public metodu na setup, kde si poöleö referenciu na hr·Ëa  
     }
 }

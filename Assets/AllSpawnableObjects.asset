@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6323f6cb7b6a0854a9c4ceb329218632, type: 3}
+  m_Name: AllSpawnableObjects
+  m_EditorClassIdentifier: 
+  Students:
+  - {fileID: 6332651096630590251, guid: a1cbe48e091a0ca439b51719f534826a, type: 3}
+  - {fileID: 5339764755382089239, guid: e24ec57e860db5b4c9550cd4473d0787, type: 3}
+  - {fileID: 5172211341506196978, guid: b90010326d19df74fac30d5d8306dfd0, type: 3}
+  - {fileID: 8623710296996209442, guid: b8ccbafe76a618645b8812ebde8b59ae, type: 3}
+  - {fileID: 2840197788645986263, guid: 437e5556842257649b7d7dc0d9485e3d, type: 3}
+  - {fileID: 694274586286654005, guid: 0685e1f5780d9a646b6705cf7d0f412f, type: 3}
+  Shooters:
+  - {fileID: 8733845072280127047, guid: dda08c002fdcb3e4199c41ff0512ea31, type: 3}
+  Gun: {fileID: 2910092683756117737, guid: 16dbdc04363512b4b82c6d6fb0c7a9ab, type: 3}

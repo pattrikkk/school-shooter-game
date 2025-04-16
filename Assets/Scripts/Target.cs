@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-     public Transform player;   // The player’s position to follow
+     public Transform player;   // The _player’s position to follow
     public float moveSpeed = 3f;  // The speed at which the AI moves
 
 
@@ -21,11 +21,11 @@ public class Target : MonoBehaviour
     {
         if (player == null) return;
 
-        // Calculate direction from AI to player
+        // Calculate direction from AI to _player
         Vector3 direction = player.position - transform.position;
         direction.Normalize();
 
-        // Move the AI towards the player
+        // Move the AI towards the _player
         transform.position += direction * moveSpeed * Time.deltaTime;
     }
 

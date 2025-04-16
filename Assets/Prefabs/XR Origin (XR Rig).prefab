@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3487689888058701928}
   - component: {fileID: 3487689888058701931}
   - component: {fileID: 3487689888058701930}
+  - component: {fileID: 1133995828481384681}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -65,6 +66,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionAssets:
   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+--- !u!114 &1133995828481384681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3487689888058701925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1610ed2a02f426b4184e5b216546ac89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastOrigin: {fileID: 3487689888809363288}
+  maxRaycastDistance: 100
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  gazeTimeThreshold: 2
 --- !u!1 &3487689888647191840
 GameObject:
   m_ObjectHideFlags: 0
