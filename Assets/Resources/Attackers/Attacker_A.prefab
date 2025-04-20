@@ -1237,7 +1237,7 @@ GameObject:
   - component: {fileID: 8499893386791730792}
   - component: {fileID: 8499893386791730807}
   m_Layer: 6
-  m_Name: Attacker_Black_EnemyAI
+  m_Name: Attacker_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

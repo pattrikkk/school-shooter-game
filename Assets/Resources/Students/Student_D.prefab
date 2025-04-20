@@ -1235,7 +1235,7 @@ GameObject:
   - component: {fileID: 8999954021676890520}
   - component: {fileID: 3028229481205326818}
   m_Layer: 0
-  m_Name: Student_scout_girl
+  m_Name: Student_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 209804008490195087}
   - component: {fileID: 6055498128176382709}
   m_Layer: 0
-  m_Name: Student_scout_girl_hispanic
+  m_Name: Student_F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

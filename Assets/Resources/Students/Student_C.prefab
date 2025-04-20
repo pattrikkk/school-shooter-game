@@ -832,7 +832,7 @@ GameObject:
   - component: {fileID: 5515979783420866376}
   - component: {fileID: 1904071255019271474}
   m_Layer: 0
-  m_Name: Student_SchoolBoy_blonde
+  m_Name: Student_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
