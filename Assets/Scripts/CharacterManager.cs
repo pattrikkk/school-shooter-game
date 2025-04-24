@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -28,8 +28,6 @@ public class CharacterManager : MonoBehaviour
         GameObject[] attackers = Resources.LoadAll<GameObject>("Attackers");
         if (attackers.Length == 0) Debug.LogError("No attacker prefabs found in Resources/Attackers!");
         shooterPrefab = attackers[Random.Range(0, attackers.Length)];
-        var aiScript = shooterPrefab.GetComponent<EnemyAI>();
-        aiScript.Setup(_playerNonVR.transform);
 
         classrooms.AddRange(FindObjectsOfType<ClassroomSpawnArea>());
         if (classrooms.Count == 0) Debug.LogError("No ClassroomSpawnArea components found in the scene!");
@@ -41,13 +39,16 @@ public class CharacterManager : MonoBehaviour
         if (classrooms.Count == 0) return;
 
         ClassroomSpawnArea shooterRoom = classrooms[Random.Range(0, classrooms.Count)];
-        bool shooterSpawned = TrySpawnEntity(shooterPrefab, shooterRoom);
+        var shooterSpawned = TrySpawnEntity(shooterPrefab, shooterRoom);
 
         if (!shooterSpawned)
         {
             shooterRoom = classrooms[Random.Range(0, classrooms.Count)];
             shooterSpawned = TrySpawnEntity(shooterPrefab, shooterRoom);
         }
+
+        var enemyAI = shooterSpawned.GetComponent<EnemyAI>();
+        enemyAI.Setup(_playerNonVR.transform);
 
         foreach (var classroom in classrooms)
         {
@@ -60,10 +61,10 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    bool TrySpawnEntity(GameObject prefab, ClassroomSpawnArea classroom)
+    GameObject TrySpawnEntity(GameObject prefab, ClassroomSpawnArea classroom)
     {
         BoxCollider classroomCollider = classroom.GetComponent<BoxCollider>();
-        if (classroomCollider == null) return false;
+        if (classroomCollider == null) return null;
 
         for (int i = 0; i < 30; i++)
         {
@@ -72,11 +73,11 @@ public class CharacterManager : MonoBehaviour
 
             if (!Physics.CheckBox(spawnPos, spawnAreaSize / 2, Quaternion.identity, collisionCheckLayers))
             {
-                Instantiate(prefab, spawnPos, Quaternion.Euler(0, Random.Range(0, 360), 0));
-                return true;
+                var obj = Instantiate(prefab, spawnPos, Quaternion.Euler(0, Random.Range(0, 360), 0));
+                return obj;
             }
         }
-        return false;
+        return null;
     }
 
     Vector3 GetRandomPositionInBounds(ClassroomSpawnArea classroom)

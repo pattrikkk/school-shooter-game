@@ -208,6 +208,7 @@ MonoBehaviour:
   _jumpHeight: 1
   _playerCamera: {fileID: 4973255792493669532}
   _controller: {fileID: 4973255793247479346}
+  _obj: {fileID: 11400000, guid: e7f9a5dbecfa7ed4e847b716e7bd0667, type: 2}
 --- !u!136 &4973255793247479356
 CapsuleCollider:
   m_ObjectHideFlags: 0

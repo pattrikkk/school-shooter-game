@@ -8,6 +8,7 @@ public class PlayerControllerNonVR : MonoBehaviour
     [SerializeField] private float _jumpHeight = 1f;
     [SerializeField] private Transform _playerCamera;
     [SerializeField] CharacterController _controller;
+    [SerializeField] Objects _obj;
 
     private Vector3 _velocity;
     private float _xRotation = 0f;
@@ -22,7 +23,30 @@ public class PlayerControllerNonVR : MonoBehaviour
         HandleMouseLook();
         HandleMovement();
         HandleGravityAndJump();
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Shoot();
+        }
     }
+
+    private void Shoot()
+    {
+        Ray ray = new Ray(_playerCamera.position, _playerCamera.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100f))
+        {
+            Debug.Log("Hit: " + hit.collider.name);
+
+            // Optional: damage logic
+            if (hit.collider.CompareTag("Enemy"))
+            {
+
+                hit.collider.GetComponentInParent<EnemyAI>().TakeDamage(1);
+            }
+        }
+    }
+
 
     private void HandleMouseLook()
     {

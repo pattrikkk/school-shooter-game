@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -83,6 +84,7 @@ public class EnemyAI : MonoBehaviour
 
         if (_animator != null)
         {
+            _animator.SetBool("CanShoot", false);
             _animator.SetBool("IsDead", true); // Use the parameter name
         }
         //  Disable the NavMeshAgent
@@ -97,21 +99,16 @@ public class EnemyAI : MonoBehaviour
             _capsuleCollider.enabled = false;
         }
 
-        Destroy(gameObject, 3f); // Adjust the time as needed for your death animation
+        StartCoroutine(DisableAnimatorAfterDelay(5f));
+        //Destroy(gameObject, 4f); // Adjust the time as needed for your death animation
     }
 
-    void OnCollisionEnter(Collision collision)
+    private IEnumerator DisableAnimatorAfterDelay(float delay)
     {
-        Debug.Log("BULET");
-
-        // Check if the collision was with a bullet
-        if (collision.gameObject.tag == "Bullet")
-        {
-            Debug.Log("BULET");
-            Destroy(collision.gameObject);
-            TakeDamage(1);
-        }
+        yield return new WaitForSeconds(delay);
+        _animator.enabled = false;
     }
+
 
     void OnDrawGizmosSelected()
     {

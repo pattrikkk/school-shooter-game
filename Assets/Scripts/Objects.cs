@@ -7,4 +7,5 @@ public class Objects : ScriptableObject
     public List<GameObject> Students;
     public List<GameObject> Shooters;
     public GameObject Gun;
+    public GameObject Bullet;
 }
