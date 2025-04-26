@@ -1319,6 +1319,11 @@ MonoBehaviour:
   _rotationSpeed: 5
   _animator: {fileID: 2638869318187615879}
   _health: 3
+  enemyDescription: <b>Suspect:</b> Marcus Johnson, African American, 6'1", student
+    at the university, athletic build.<br><b>Appearance:</b> Short black fade haircut.<br><b>Clothing:</b>
+    Black leather jacket, white t-shirt, light jeans.<br><b>Weapon:</b> Modified
+    Glock 19 with extended magazine.<br><b>Behavior:</b> Armed, hostile, holding
+    hostages.
   _capsuleCollider: {fileID: 4168736347742602875}
 --- !u!1 &8862203072322625981
 GameObject:

@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float _rotationSpeed = 5f;    // Speed at which the enemy rotates
     [SerializeField] Animator _animator;
     [SerializeField] private int _health = 3;
+    [SerializeField] public string enemyDescription;
     [SerializeField] CapsuleCollider _capsuleCollider;
 
     private Transform _player;
