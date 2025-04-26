@@ -13,6 +13,7 @@ public class GunScript : MonoBehaviour
     {
         GameObject newProjectile = Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation) as GameObject;
         newProjectile.GetComponent<Rigidbody>().AddForce(grabPoint.transform.forward * power, ForceMode.VelocityChange);
+        ShootRay();
     }
 
     private void ShootRay()
