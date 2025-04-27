@@ -11,6 +11,7 @@ public class CharacterManager : MonoBehaviour
     private List<GameObject> regularStudentPrefabs;
     private List<ClassroomSpawnArea> classrooms = new List<ClassroomSpawnArea>();
     private float spawnClearanceRadius = 2f;
+    [SerializeField] Transform _safePlace;
 
     public LayerMask collisionCheckLayers;
 
@@ -60,7 +61,8 @@ public class CharacterManager : MonoBehaviour
             for (int i = 0; i < studentsToSpawn; i++)
             {
                 GameObject randomStudent = allStudentPrefabs[UnityEngine.Random.Range(0, allStudentPrefabs.Count)];
-                TrySpawnEntity(randomStudent, classroom);
+                var spawnedStudent = TrySpawnEntity(randomStudent, classroom);
+                spawnedStudent.GetComponent<InteractableNPC>().Setup(_safePlace);
             }
         }
     }

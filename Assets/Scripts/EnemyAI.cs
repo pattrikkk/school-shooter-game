@@ -10,6 +10,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private int _health = 3;
     [SerializeField] public string enemyDescription;
     [SerializeField] CapsuleCollider _capsuleCollider;
+    [SerializeField] private GunScript _gunScript;
+    [SerializeField] private InteractableNPC _interactableNPC;
 
     private Transform _player;
     private NavMeshAgent _agent;
@@ -36,8 +38,16 @@ public class EnemyAI : MonoBehaviour
 
     private void IsBeingGazedOn()
     {
+        Shoot();
+    }
+
+    public void Shoot()
+    {
+        if (_wasGazedAt) return;
+        _interactableNPC.InteractableCanvas.enabled = false;
         _wasGazedAt = true;
         _animator.SetBool("CanShoot", true);
+        InvokeRepeating(nameof(_gunScript.Shoot), 0f, 0.5f);
     }
 
     void Update()
@@ -101,6 +111,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         StartCoroutine(DisableAnimatorAfterDelay(5f));
+
         //Destroy(gameObject, 4f); // Adjust the time as needed for your death animation
     }
 
