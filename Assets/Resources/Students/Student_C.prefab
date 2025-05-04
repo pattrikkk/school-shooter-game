@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 3881595795874564010}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -850,7 +850,7 @@ GameObject:
   - component: {fileID: 3899895355963980506}
   m_Layer: 0
   m_Name: Student_C
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

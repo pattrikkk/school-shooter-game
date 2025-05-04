@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class InteractableNPC : MonoBehaviour
     private Transform _safePlaceTarget;
 
     public Canvas InteractableCanvas => _interactionCanvas;
+    public static Action<string> OnWrongDecision;
 
     public void Setup(Transform safePlace)
     {
@@ -55,8 +57,7 @@ public class InteractableNPC : MonoBehaviour
         {
             if (_isAttacker)
             {
-                Debug.Log("Mission Failed - You helped attacker!"); // TODO VYPISAT NA UI normalne ze konec a restart button
-
+                OnWrongDecision?.Invoke("Mission Failed - You helped attacker! \n level will be restarted!");
             }
             else
             {
@@ -71,9 +72,7 @@ public class InteractableNPC : MonoBehaviour
     {
         if (!_isAttacker)
         {
-            Debug.Log("Mission Failed - You attacked an innocent student!");  // TODO VYPISAT NA UI normalne ze konec a restart button
-            var enemyAi = GetComponent<EnemyAI>();
-            enemyAi.Shoot();
+            OnWrongDecision?.Invoke("Mission Failed - You attacked on innocent children! \n level will be restarted!");
             _interactionCanvas.enabled = false;
         }
         else

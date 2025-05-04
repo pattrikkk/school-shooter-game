@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -41,18 +43,25 @@ public class EnemyAI : MonoBehaviour
         Shoot();
     }
 
-    public void Shoot()
+    public async void Shoot()
     {
         if (_wasGazedAt) return;
         _interactableNPC.InteractableCanvas.enabled = false;
         _wasGazedAt = true;
         _animator.SetBool("CanShoot", true);
-        InvokeRepeating(nameof(_gunScript.Shoot), 0f, 0.5f);
+        while (!_isDead)
+        {
+            if (_gunScript)
+            {
+                _gunScript.Shoot(); // Call the Shoot method on your GunScript
+            }
+            await Task.Delay(500); // Wait for 0.5 seconds (500 milliseconds)
+        }
     }
 
     void Update()
     {
-        if (_player == null || _isDead) return;
+        if (!_player || _isDead) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, _player.position);
 

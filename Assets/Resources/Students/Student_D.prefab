@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 5215889424639118237}
   m_Layer: 0
   m_Name: body
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1253,7 +1253,7 @@ GameObject:
   - component: {fileID: 3229418145743373326}
   m_Layer: 0
   m_Name: Student_D
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

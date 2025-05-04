@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GunScript : MonoBehaviour
 {
+    [SerializeField] AudioClip _shootSound;
+    [SerializeField] AudioSource _audioSource;
     public GameObject projectile;
     public float power = 20.0f;
     // sila/rýchlosť výstrelu    
@@ -9,11 +11,17 @@ public class GunScript : MonoBehaviour
     // pozícia na ktorej vznikne projektil  
     public GameObject grabPoint;
     // pozícia na ktorej vznikne projektil      
-    public void Shoot()
+    private bool _isEnemy = false;
+    public void Shoot(bool isEnemy = false)
     {
+        _isEnemy = isEnemy;
         GameObject newProjectile = Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation) as GameObject;
         newProjectile.GetComponent<Rigidbody>().AddForce(grabPoint.transform.forward * power, ForceMode.VelocityChange);
         ShootRay();
+        if (_audioSource && _shootSound)
+        {
+            _audioSource.PlayOneShot(_shootSound);
+        }
     }
 
     private void ShootRay()
@@ -29,6 +37,12 @@ public class GunScript : MonoBehaviour
             {
 
                 hit.collider.GetComponentInParent<EnemyAI>().TakeDamage(1);
+            }
+            
+            if (hit.collider.CompareTag("Player"))
+            {
+
+                hit.collider.GetComponentInParent<PlayerVR>().TakeDamage(1);
             }
         }
     }
