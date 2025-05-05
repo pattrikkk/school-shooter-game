@@ -11,14 +11,18 @@ public class InteractableNPC : MonoBehaviour
 
     [Header("NPC Settings")]
     [SerializeField] private bool _isAttacker = false; // Set true if this NPC is an attacker
-    private Transform _safePlaceTarget;
+    private BoxCollider _safeZone;
+
+    public event Action<bool> OnAllRequiredNpcsSaved;
+
+    private int rescuedNpc = 0;
 
     public Canvas InteractableCanvas => _interactionCanvas;
     public static Action<string> OnWrongDecision;
 
-    public void Setup(Transform safePlace)
+    public void Setup(BoxCollider safeZone)
     {
-        _safePlaceTarget = safePlace;
+        _safeZone = safeZone;
     }
 
     private void Start()
@@ -53,26 +57,32 @@ public class InteractableNPC : MonoBehaviour
 
     private void OnSafePlaceClicked()
     {
-        if (_safePlaceTarget != null)
+        if (_safeZone != null)
         {
             if (_isAttacker)
             {
-                OnWrongDecision?.Invoke("Mission Failed - You helped attacker! \n level will be restarted!");
+                OnWrongDecision?.Invoke("Mission Failed - You helped the attacker! \n level will be restarted!");
             }
             else
             {
-                transform.position = _safePlaceTarget.position;
-                Debug.Log("NPC is moving to the safe place!");
+                Vector3 safeZonePosition = GetRandomPositionInSafeZone();
+                transform.position = safeZonePosition;
+                rescuedNpc++;
+                if (rescuedNpc == 5)
+                    OnAllRequiredNpcsSaved?.Invoke(true);
+                {
+                    Debug.Log("NPC is moving to the safe place!");
+                }
             }
+            _interactionCanvas.enabled = false;
         }
-        _interactionCanvas.enabled = false;
     }
 
     private void OnAttackClicked()
     {
         if (!_isAttacker)
         {
-            OnWrongDecision?.Invoke("Mission Failed - You attacked on innocent children! \n level will be restarted!");
+            OnWrongDecision?.Invoke("Mission Failed - You attacked an innocent children! \n level will be restarted!");
             _interactionCanvas.enabled = false;
         }
         else
@@ -81,5 +91,16 @@ public class InteractableNPC : MonoBehaviour
             // Handle attacker defeat
         }
         _interactionCanvas.enabled = false;
+    }
+
+
+    private Vector3 GetRandomPositionInSafeZone()
+    {
+        Bounds bounds = _safeZone.bounds;
+        return new Vector3(
+            UnityEngine.Random.Range(bounds.min.x, bounds.max.x),
+            0.85f,
+            UnityEngine.Random.Range(bounds.min.z, bounds.max.z)
+        );
     }
 }

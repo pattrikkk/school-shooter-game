@@ -11,7 +11,7 @@ public class CharacterManager : MonoBehaviour
     private List<GameObject> regularStudentPrefabs;
     private List<ClassroomSpawnArea> classrooms = new List<ClassroomSpawnArea>();
     private float spawnClearanceRadius = 2f;
-    [SerializeField] Transform _safePlace;
+    [SerializeField] private BoxCollider _safeZone;
 
     public LayerMask collisionCheckLayers;
 
@@ -52,7 +52,6 @@ public class CharacterManager : MonoBehaviour
 
         var enemyAI = shooterSpawned.GetComponent<EnemyAI>();
         enemyAI.Setup(_playerNonVR.transform);
-        Debug.Log($"Shooter spawned in {enemyAI.enemyDescription}");
         OnShooterSpawned?.Invoke(enemyAI.enemyDescription);
 
         foreach (var classroom in classrooms)
@@ -62,7 +61,7 @@ public class CharacterManager : MonoBehaviour
             {
                 GameObject randomStudent = allStudentPrefabs[UnityEngine.Random.Range(0, allStudentPrefabs.Count)];
                 var spawnedStudent = TrySpawnEntity(randomStudent, classroom);
-                spawnedStudent.GetComponent<InteractableNPC>().Setup(_safePlace);
+                spawnedStudent.GetComponent<InteractableNPC>().Setup(_safeZone);
             }
         }
     }

@@ -1,10 +1,39 @@
 using UnityEngine;
 
+using UnityEngine;
+
 [RequireComponent(typeof(BoxCollider))]
 public class ClassroomSpawnArea : MonoBehaviour
 {
-    [Range(0, 6)]
-    public int maxStudents = 6;
+    public int maxStudents = 3;
+    public bool HasBeenVisited { get; private set; }
+
+    private void Start()
+    {
+        GetComponent<BoxCollider>().isTrigger = true;
+        GameManager.Instance.RegisterClassroom(this);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            GameManager.Instance.HandlePlayerEnter(this);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            GameManager.Instance.HandlePlayerExit(this);
+        }
+    }
+
+    public void MarkAsVisited()
+    {
+        HasBeenVisited = true;
+    }
 
 
     // Zobraziť Areu kde sa môže spawnúť čávo

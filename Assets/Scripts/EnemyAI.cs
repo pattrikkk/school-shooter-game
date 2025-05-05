@@ -15,6 +15,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private GunScript _gunScript;
     [SerializeField] private InteractableNPC _interactableNPC;
 
+    public static event Action<bool> OnEnemyNeutralized;
     private Transform _player;
     private NavMeshAgent _agent;
     private bool _playerInRange = false;
@@ -120,6 +121,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         StartCoroutine(DisableAnimatorAfterDelay(5f));
+        OnEnemyNeutralized?.Invoke(true);
 
         //Destroy(gameObject, 4f); // Adjust the time as needed for your death animation
     }
