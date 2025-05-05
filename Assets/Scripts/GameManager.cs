@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private float _requiredVisitTime = 3f;
-
+    [SerializeField] private PlayerVR _playerVR; 
     private List<ClassroomSpawnArea> _allClassrooms = new List<ClassroomSpawnArea>();
     private int _visitedCount;
     private Dictionary<ClassroomSpawnArea, float> _playerEnterTimes = new Dictionary<ClassroomSpawnArea, float>();
@@ -139,11 +139,13 @@ public class GameManager : MonoBehaviour
     {
         if (_enemyNeutralized && _allClassroomsVisited && _allNpcsSaved)
         {
+            _playerVR.ShowMessage("GAME COMPLETED!\n All three quests have been finished.\n New level loading!", false);
             Debug.Log("GAME COMPLETED! All three quests have been finished.");
-
+            
         }
         else
         {
+            _playerVR.ShowMessage($"Quest progress: Classrooms: {_allClassroomsVisited}, Enemy: {_enemyNeutralized}, NPCs: {_allNpcsSaved}", true);
             Debug.Log($"Quest progress: Classrooms: {_allClassroomsVisited}, Enemy: {_enemyNeutralized}, NPCs: {_allNpcsSaved}");
         }
     }

@@ -18,7 +18,7 @@ public class InteractableNPC : MonoBehaviour
     private int rescuedNpc = 0;
 
     public Canvas InteractableCanvas => _interactionCanvas;
-    public static Action<string> OnWrongDecision;
+    public static Action<string, bool> OnWrongDecision;
 
     public void Setup(BoxCollider safeZone)
     {
@@ -61,7 +61,7 @@ public class InteractableNPC : MonoBehaviour
         {
             if (_isAttacker)
             {
-                OnWrongDecision?.Invoke("Mission Failed - You helped the attacker! \n level will be restarted!");
+                OnWrongDecision?.Invoke("Mission Failed - You helped the attacker! \n level will be restarted!", false);
             }
             else
             {
@@ -82,7 +82,7 @@ public class InteractableNPC : MonoBehaviour
     {
         if (!_isAttacker)
         {
-            OnWrongDecision?.Invoke("Mission Failed - You attacked an innocent children! \n level will be restarted!");
+            OnWrongDecision?.Invoke("Mission Failed - You attacked an innocent children! \n level will be restarted!", false);
             _interactionCanvas.enabled = false;
         }
         else

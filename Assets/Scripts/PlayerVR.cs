@@ -12,12 +12,12 @@ public class PlayerVR : MonoBehaviour
 
     private void OnEnable()
     {
-        InteractableNPC.OnWrongDecision += Failed;
+        InteractableNPC.OnWrongDecision += ShowMessage;
     }
 
     private void OnDisable()
     {
-        InteractableNPC.OnWrongDecision -= Failed;
+        InteractableNPC.OnWrongDecision -= ShowMessage;
     }
 
     public void TakeDamage(int damage)
@@ -25,19 +25,24 @@ public class PlayerVR : MonoBehaviour
         _health -= damage;
         if (_health <= 0)
         {
-            Failed( "You died, level will be restarted!");
+            ShowMessage( "You died, level will be restarted!");
         }
     }
 
-    private void Failed(string text)
+    public async void ShowMessage(string text, bool hideOnly = false)
     {
-        
-        _failMessage.text = text; 
-        _parentMessage.gameObject.SetActive(true);
+        _failMessage.text = text;
+        _parentMessage.SetActive(true);
 
-        Task.Delay(2000).ContinueWith(t =>
+        await Task.Delay(4000);
+
+        if (hideOnly)
+        {
+            _parentMessage.SetActive(false);
+        }
+        else
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }, TaskScheduler.FromCurrentSynchronizationContext());
+        }
     }
 }
