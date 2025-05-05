@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
 
     // Events
     public event Action<ClassroomSpawnArea> OnClassroomVisited;
-    public event Action<bool> OnAllClassroomsVisited;
-    public event Action OnAllQuestsCompleted;
 
     void OnEnable()
     {
@@ -35,17 +33,17 @@ public class GameManager : MonoBehaviour
         EnemyAI.OnEnemyNeutralized -= HandleEnemyNeutralized;
     }
 
-    private void HandleNpcsSaved()
+    private void HandleNpcsSaved(bool isCompleted)
     {
         Debug.Log("All required NPCs have been saved!");
-        _allNpcsSaved = true;
+        _allNpcsSaved = isCompleted;
         CheckAllQuestsCompletion();
     }
 
-    private void HandleEnemyNeutralized()
+    private void HandleEnemyNeutralized(bool isCompleted)
     {
         Debug.Log("Enemy has been neutralized!");
-        _enemyNeutralized = true;
+        _enemyNeutralized = isCompleted;
         CheckAllQuestsCompletion();
     }
 
@@ -133,11 +131,6 @@ public class GameManager : MonoBehaviour
         {
             _allClassroomsVisited = true;
 
-            if (OnAllClassroomsVisited != null)
-            {
-                OnAllClassroomsVisited.Invoke(true);
-            }
-
             HandleClassroomQuest(true);
         }
     }
@@ -147,10 +140,7 @@ public class GameManager : MonoBehaviour
         if (_enemyNeutralized && _allClassroomsVisited && _allNpcsSaved)
         {
             Debug.Log("GAME COMPLETED! All three quests have been finished.");
-            if (OnAllQuestsCompleted != null)
-            {
-                OnAllQuestsCompleted.Invoke();
-            }
+
         }
         else
         {

@@ -13,7 +13,7 @@ public class InteractableNPC : MonoBehaviour
     [SerializeField] private bool _isAttacker = false; // Set true if this NPC is an attacker
     private BoxCollider _safeZone;
 
-    public event Action<bool> OnAllRequiredNpcsSaved;
+    public static event Action<bool> OnAllRequiredNpcsSaved;
 
     private int rescuedNpc = 0;
 
