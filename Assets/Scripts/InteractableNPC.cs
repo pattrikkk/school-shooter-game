@@ -67,10 +67,11 @@ public class InteractableNPC : MonoBehaviour
             {
                 Vector3 safeZonePosition = GetRandomPositionInSafeZone();
                 transform.position = safeZonePosition;
+                Debug.Log("NPCSaved");
                 rescuedNpc++;
-                if (rescuedNpc == 5)
-                    OnAllRequiredNpcsSaved?.Invoke(true);
+                if (rescuedNpc >= 5)
                 {
+                    OnAllRequiredNpcsSaved?.Invoke(true);
                     Debug.Log("NPC is moving to the safe place!");
                 }
             }

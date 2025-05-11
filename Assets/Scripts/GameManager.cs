@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour
     private void HandleNpcsSaved(bool isCompleted)
     {
         Debug.Log("All required NPCs have been saved!");
-        _allNpcsSaved = isCompleted;
+        _allNpcsSaved = true;
         CheckAllQuestsCompletion();
     }
 
@@ -141,12 +143,19 @@ public class GameManager : MonoBehaviour
         {
             _playerVR.ShowMessage("GAME COMPLETED!\n All three quests have been finished.\n New level loading!", false);
             Debug.Log("GAME COMPLETED! All three quests have been finished.");
-            
+            Restart();
         }
         else
         {
             _playerVR.ShowMessage($"Quest progress: Classrooms: {_allClassroomsVisited}, Enemy: {_enemyNeutralized}, NPCs: {_allNpcsSaved}", true);
             Debug.Log($"Quest progress: Classrooms: {_allClassroomsVisited}, Enemy: {_enemyNeutralized}, NPCs: {_allNpcsSaved}");
         }
+    }
+
+    private async void Restart()
+    {
+        await Task.Delay(4000);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
 }
