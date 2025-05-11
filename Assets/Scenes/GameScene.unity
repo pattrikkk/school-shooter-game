@@ -6521,7 +6521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1939283358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6711,9 +6711,9 @@ Canvas:
   m_GameObject: {fileID: 1946922177}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 3487689888836357747}
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -16208,7 +16208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3487689888058701925, guid: aa2182e38bb014b43aee71cbab8e4de7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3487689888058701925, guid: aa2182e38bb014b43aee71cbab8e4de7, type: 3}
       propertyPath: m_TagString
@@ -16866,7 +16866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4973255793247479345, guid: 4ee9c258ec7af1f4d9ed2ade19816259, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4973255793247479345, guid: 4ee9c258ec7af1f4d9ed2ade19816259, type: 3}
       propertyPath: m_TagString
