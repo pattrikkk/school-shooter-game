@@ -82,6 +82,15 @@ public class EnemyAI : MonoBehaviour
         {
             _playerInRange = false;
         }
+        
+        if (_canvas && _canvas.worldCamera)
+        {
+            // Make the canvas face the camera
+            _canvas.transform.LookAt(_canvas.worldCamera.transform);
+    
+            // Optionally reverse the canvas so it's not mirrored
+            _canvas.transform.Rotate(0, 180, 0);
+        }
 
 
         //_agent.SetDestination(_player.position);  // Follow Player.  Remove/Comment this out if you don't want it to follow.
