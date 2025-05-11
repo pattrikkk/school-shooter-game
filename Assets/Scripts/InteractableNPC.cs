@@ -12,10 +12,9 @@ public class InteractableNPC : MonoBehaviour
     [Header("NPC Settings")]
     [SerializeField] private bool _isAttacker = false; // Set true if this NPC is an attacker
     private BoxCollider _safeZone;
-
+    public bool CanShown = true;
     public static event Action<bool> OnAllRequiredNpcsSaved;
-
-    private int rescuedNpc = 0;
+    public static event Action OnKillEnemy;
 
     public Canvas InteractableCanvas => _interactionCanvas;
     public static Action<string, bool> OnWrongDecision;
@@ -41,6 +40,7 @@ public class InteractableNPC : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!CanShown) return;
         if (other.CompareTag("Player")) // Make sure player has "Player" tag
         {
             _interactionCanvas.enabled = true;
@@ -67,13 +67,8 @@ public class InteractableNPC : MonoBehaviour
             {
                 Vector3 safeZonePosition = GetRandomPositionInSafeZone();
                 transform.position = safeZonePosition;
-                Debug.Log("NPCSaved");
-                rescuedNpc++;
-                if (rescuedNpc >= 5)
-                {
-                    OnAllRequiredNpcsSaved?.Invoke(true);
-                    Debug.Log("NPC is moving to the safe place!");
-                }
+                OnAllRequiredNpcsSaved?.Invoke(true);
+                Debug.Log("NPC is moving to the safe place!");
             }
             _interactionCanvas.enabled = false;
         }
@@ -81,6 +76,8 @@ public class InteractableNPC : MonoBehaviour
 
     private void OnAttackClicked()
     {
+        if (_safeZone == null) return;
+        
         if (!_isAttacker)
         {
             OnWrongDecision?.Invoke("Mission Failed - You attacked an innocent children! \n level will be restarted!", false);
@@ -90,6 +87,7 @@ public class InteractableNPC : MonoBehaviour
         {
             Debug.Log("You eliminated an attacker!");
             // Handle attacker defeat
+            OnKillEnemy?.Invoke();
         }
         _interactionCanvas.enabled = false;
     }

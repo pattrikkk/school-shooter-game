@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private bool _allClassroomsVisited = false;
     private bool _allNpcsSaved = false;
 
+    private int _npcCounter = 0;
     // Events
     public event Action<ClassroomSpawnArea> OnClassroomVisited;
 
@@ -37,9 +38,13 @@ public class GameManager : MonoBehaviour
 
     private void HandleNpcsSaved(bool isCompleted)
     {
-        Debug.Log("All required NPCs have been saved!");
-        _allNpcsSaved = true;
-        CheckAllQuestsCompletion();
+        _npcCounter++;
+        if (_npcCounter >= 5)
+        {
+            _allNpcsSaved = true;
+            Debug.Log("All required NPCs have been saved!");
+            CheckAllQuestsCompletion();
+        }
     }
 
     private void HandleEnemyNeutralized(bool isCompleted)

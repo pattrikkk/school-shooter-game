@@ -28,11 +28,13 @@ public class EnemyAI : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         CheckGaze.OnGazeAction += IsBeingGazedOn;
+        InteractableNPC.OnKillEnemy += Die;
     }
 
     private void OnDestroy()
     {
         CheckGaze.OnGazeAction -= IsBeingGazedOn;
+        InteractableNPC.OnKillEnemy -= Die;
     }
 
     public void Setup(Transform player, Camera camera)
@@ -50,6 +52,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (_wasGazedAt) return;
         _interactableNPC.InteractableCanvas.enabled = false;
+        _interactableNPC.CanShown = false;
         _wasGazedAt = true;
         _animator.SetBool("CanShoot", true);
         while (!_isDead)
