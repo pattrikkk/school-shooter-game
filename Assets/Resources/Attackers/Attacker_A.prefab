@@ -1330,6 +1330,7 @@ MonoBehaviour:
   _capsuleCollider: {fileID: 4168736347742602875}
   _gunScript: {fileID: 4765941100164256245}
   _interactableNPC: {fileID: 6653022639659841776}
+  _canvas: {fileID: 2899720119965855319}
 --- !u!65 &1037992070403413781
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] CapsuleCollider _capsuleCollider;
     [SerializeField] private GunScript _gunScript;
     [SerializeField] private InteractableNPC _interactableNPC;
+    [SerializeField] private Canvas _canvas;
 
     public static event Action<bool> OnEnemyNeutralized;
     private Transform _player;
@@ -34,9 +35,10 @@ public class EnemyAI : MonoBehaviour
         CheckGaze.OnGazeAction -= IsBeingGazedOn;
     }
 
-    public void Setup(Transform player)
+    public void Setup(Transform player, Camera camera)
     {
         _player = player;
+        _canvas.worldCamera = camera;
     }
 
     private void IsBeingGazedOn()

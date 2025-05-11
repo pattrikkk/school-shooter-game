@@ -6,6 +6,7 @@ public class CharacterManager : MonoBehaviour
 {
     [SerializeField] private Transform _player;
     [SerializeField] private PlayerControllerNonVR _playerNonVR;
+    [SerializeField] private Camera _playerCamera;
     private List<GameObject> allStudentPrefabs;
     private GameObject shooterPrefab;
     private List<GameObject> regularStudentPrefabs;
@@ -51,7 +52,7 @@ public class CharacterManager : MonoBehaviour
         }
 
         var enemyAI = shooterSpawned.GetComponent<EnemyAI>();
-        enemyAI.Setup(_playerNonVR.transform);
+        enemyAI.Setup(_player, _playerCamera);
         OnShooterSpawned?.Invoke(enemyAI.enemyDescription);
 
         foreach (var classroom in classrooms)

@@ -907,6 +907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1998591339}
   _playerNonVR: {fileID: 757433040}
+  _playerCamera: {fileID: 3487689888836357747}
   _safeZone: {fileID: 34031653}
   collisionCheckLayers:
     serializedVersion: 2
@@ -16839,6 +16840,11 @@ PrefabInstance:
       objectReference: {fileID: 165585587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa2182e38bb014b43aee71cbab8e4de7, type: 3}
+--- !u!20 &3487689888836357747 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3487689888809363295, guid: aa2182e38bb014b43aee71cbab8e4de7, type: 3}
+  m_PrefabInstance: {fileID: 3487689888836357746}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4973255793112727428
 PrefabInstance:
   m_ObjectHideFlags: 0
