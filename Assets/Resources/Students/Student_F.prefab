@@ -255,6 +255,7 @@ MonoBehaviour:
   _safePlaceButton: {fileID: 5929426805438916910}
   _attackButton: {fileID: 7570837531172851633}
   _isAttacker: 0
+  CanShown: 1
 --- !u!65 &8172969334217315924
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1610,6 +1611,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2210885681409014450, guid: 519536c0bcb66974f8d69435e1ec7b06, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 2318763593364220744, guid: 519536c0bcb66974f8d69435e1ec7b06, type: 3}
       propertyPath: m_Name
       value: NPCInteractColider

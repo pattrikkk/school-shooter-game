@@ -1,10 +1,14 @@
 using UnityEngine;
+using UnityEngine.VFX;
+
 
 public class GunScript : MonoBehaviour
 {
     [SerializeField] AudioClip _shootSound;
     [SerializeField] AudioSource _audioSource;
+    [SerializeField] VisualEffect muzzleFlash;
     public GameObject projectile;
+    public GameObject bulletHole;
     public float power = 20.0f;
     // sila/rýchlosť výstrelu    
     public GameObject shootPoint;
@@ -18,6 +22,7 @@ public class GunScript : MonoBehaviour
         GameObject newProjectile = Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation) as GameObject;
         newProjectile.GetComponent<Rigidbody>().AddForce(grabPoint.transform.forward * power, ForceMode.VelocityChange);
         ShootRay();
+        muzzleFlash.Play();
         if (_audioSource && _shootSound)
         {
             _audioSource.PlayOneShot(_shootSound);
@@ -44,6 +49,7 @@ public class GunScript : MonoBehaviour
 
                 hit.collider.GetComponentInParent<PlayerVR>().TakeDamage(1);
             }
+            GameObject newBulletHole = Instantiate(bulletHole, hit.point + hit.normal * 0.01f, Quaternion.LookRotation(-hit.normal));
         }
     }
 }
